@@ -1,0 +1,43 @@
+<section class="max-w-2xl mx-auto">
+  <div class="bg-white shadow rounded-lg p-6 sm:p-8">
+    <h1 class="text-2xl font-semibold mb-4">Thank you! Your booking was received.</h1>
+    <% if (typeof spamSuppressed !== 'undefined' && spamSuppressed) { %>
+      <p class="text-sm text-gray-500 mb-4">(Submission flagged as spam and not emailed.)</p>
+    <% } %>
+    <p class="mb-4">We’ve sent your booking to our team. You’ll receive a confirmation soon.</p>
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-200 rounded">
+        <tbody>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Full Name</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.fullName %></td>
+          </tr>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Email</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.email %></td>
+          </tr>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Phone</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.phone %></td>
+          </tr>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Pickup</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.pickupAddress %> — <%= summary.pickupDate %> <%= summary.pickupTime %></td>
+          </tr>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Dropoff</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.dropoffAddress %></td>
+          </tr>
+          <tr class="even:bg-gray-50">
+            <td class="border border-gray-200 px-3 py-2 font-medium">Passengers</td>
+            <td class="border border-gray-200 px-3 py-2"><%= summary.passengers %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6">
+      <a href="/" class="text-blue-600 hover:text-blue-700">Make another booking</a>
+    </div>
+  </div>
+</section>
+

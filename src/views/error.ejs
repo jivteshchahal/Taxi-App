@@ -1,0 +1,13 @@
+<section class="max-w-2xl mx-auto">
+  <div class="bg-white shadow rounded-lg p-6 sm:p-8">
+    <h1 class="text-2xl font-semibold mb-4">Something went wrong</h1>
+    <p class="mb-4"><%= message %></p>
+    <% if (error && error.stack) { %>
+      <pre class="overflow-auto bg-gray-100 text-gray-700 p-3 rounded text-xs"><%= error.stack %></pre>
+    <% } %>
+    <div class="mt-6">
+      <a href="/" class="text-blue-600 hover:text-blue-700">Back to booking form</a>
+    </div>
+  </div>
+</section>
+

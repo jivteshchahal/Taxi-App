@@ -1,0 +1,177 @@
+<section class="max-w-2xl mx-auto">
+  <div class="bg-white shadow rounded-lg p-6 sm:p-8">
+    <h1 class="text-2xl font-semibold mb-6">Book a Taxi</h1>
+    <form action="/book" method="POST" novalidate class="space-y-4">
+      <!-- Honeypot -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+      <!-- Full Name -->
+      <div>
+        <label for="fullName" class="block text-sm font-medium mb-1">Full Name</label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          value="<%= formData.fullName || '' %>"
+          placeholder="e.g., Alex Johnson"
+          aria-invalid="<%= errors.fullName ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.fullName ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <% if (errors.fullName) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.fullName.msg %></p>
+        <% } %>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%= formData.email || '' %>"
+          placeholder="you@example.com"
+          aria-invalid="<%= errors.email ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.email ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <% if (errors.email) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.email.msg %></p>
+        <% } %>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-sm font-medium mb-1">Phone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value="<%= formData.phone || '' %>"
+          placeholder="e.g., +1 555 123 4567"
+          aria-invalid="<%= errors.phone ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.phone ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <% if (errors.phone) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.phone.msg %></p>
+        <% } %>
+      </div>
+
+      <!-- Pickup Address -->
+      <div>
+        <label for="pickupAddress" class="block text-sm font-medium mb-1">Pickup Address</label>
+        <input
+          type="text"
+          id="pickupAddress"
+          name="pickupAddress"
+          value="<%= formData.pickupAddress || '' %>"
+          placeholder="Street, City, ZIP"
+          aria-invalid="<%= errors.pickupAddress ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.pickupAddress ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <% if (errors.pickupAddress) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.pickupAddress.msg %></p>
+        <% } %>
+      </div>
+
+      <!-- Dropoff Address -->
+      <div>
+        <label for="dropoffAddress" class="block text-sm font-medium mb-1">Dropoff Address</label>
+        <input
+          type="text"
+          id="dropoffAddress"
+          name="dropoffAddress"
+          value="<%= formData.dropoffAddress || '' %>"
+          placeholder="Street, City, ZIP"
+          aria-invalid="<%= errors.dropoffAddress ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.dropoffAddress ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <% if (errors.dropoffAddress) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.dropoffAddress.msg %></p>
+        <% } %>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Pickup Date -->
+        <div>
+          <label for="pickupDate" class="block text-sm font-medium mb-1">Pickup Date</label>
+          <input
+            type="date"
+            id="pickupDate"
+            name="pickupDate"
+            value="<%= formData.pickupDate || '' %>"
+            aria-invalid="<%= errors.pickupDate ? 'true' : 'false' %>"
+            class="block w-full rounded-md border <%= errors.pickupDate ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <% if (errors.pickupDate) { %>
+            <p class="mt-1 text-sm text-red-600"><%= errors.pickupDate.msg %></p>
+          <% } %>
+        </div>
+
+        <!-- Pickup Time -->
+        <div>
+          <label for="pickupTime" class="block text-sm font-medium mb-1">Pickup Time</label>
+          <input
+            type="time"
+            id="pickupTime"
+            name="pickupTime"
+            value="<%= formData.pickupTime || '' %>"
+            aria-invalid="<%= errors.pickupTime ? 'true' : 'false' %>"
+            class="block w-full rounded-md border <%= errors.pickupTime ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <% if (errors.pickupTime) { %>
+            <p class="mt-1 text-sm text-red-600"><%= errors.pickupTime.msg %></p>
+          <% } %>
+        </div>
+
+        <!-- Number of Passengers -->
+        <div>
+          <label for="passengers" class="block text-sm font-medium mb-1">Passengers</label>
+          <select
+            id="passengers"
+            name="passengers"
+            aria-invalid="<%= errors.passengers ? 'true' : 'false' %>"
+            class="block w-full rounded-md border <%= errors.passengers ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          >
+            <% for (let i = 1; i <= 6; i++) { %>
+              <option value="<%= i %>" <%= (formData.passengers || 1) == i ? 'selected' : '' %>><%= i %></option>
+            <% } %>
+          </select>
+          <% if (errors.passengers) { %>
+            <p class="mt-1 text-sm text-red-600"><%= errors.passengers.msg %></p>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div>
+        <label for="notes" class="block text-sm font-medium mb-1">Notes (optional)</label>
+        <textarea
+          id="notes"
+          name="notes"
+          rows="3"
+          placeholder="Any additional details…"
+          aria-invalid="<%= errors.notes ? 'true' : 'false' %>"
+          class="block w-full rounded-md border <%= errors.notes ? 'border-red-500' : 'border-gray-300' %> px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ><%= formData.notes || '' %></textarea>
+        <% if (errors.notes) { %>
+          <p class="mt-1 text-sm text-red-600"><%= errors.notes.msg %></p>
+        <% } %>
+      </div>
+
+      <div class="pt-2">
+        <button type="submit" class="inline-flex items-center justify-center rounded-md bg-blue-600 text-white px-4 py-2 font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          Submit Booking
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
