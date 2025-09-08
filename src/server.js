@@ -35,8 +35,11 @@ app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static files
-app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets')));
+// Static files (serve built CSS and images)
+const publicPath = path.join(__dirname, '..', 'public');
+const assetsPath = path.join(publicPath, 'assets');
+app.use(express.static(publicPath));
+app.use('/assets', express.static(assetsPath));
 
 // Security headers with minimal CSP
 app.use(
