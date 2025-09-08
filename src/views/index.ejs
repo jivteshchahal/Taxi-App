@@ -1,8 +1,23 @@
-<section class="max-w-2xl mx-auto">
+<section class="relative h-80 md:h-[500px] rounded-lg overflow-hidden mb-12">
+  <img
+    src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&w=1350&q=80"
+    alt="Taxi on city street"
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white p-4">
+    <h1 class="text-4xl sm:text-5xl font-bold mb-4">Need a Ride?</h1>
+    <p class="mb-6 text-lg">Book a taxi in seconds</p>
+    <a href="#booking" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-6 py-3 rounded-md transition">
+      Book Now
+    </a>
+  </div>
+</section>
+
+<section id="booking" class="max-w-2xl mx-auto">
   <div class="card">
     <div class="flex items-center gap-3 mb-6">
-      <img src="/images/taxi.svg" alt="Taxi" class="w-10 h-10" />
-      <h1 class="text-2xl font-semibold">Book a Taxi</h1>
+      <img src="https://img.icons8.com/color/48/000000/taxi.png" alt="Taxi" class="w-10 h-10" />
+      <h2 class="text-2xl font-semibold">Book a Taxi</h2>
     </div>
     <form action="/book" method="POST" novalidate class="space-y-4">
       <!-- Honeypot -->

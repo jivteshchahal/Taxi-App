@@ -50,7 +50,7 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'"],
         styleSrc: ["'self'"],
-        imgSrc: ["'self'", 'data:'],
+        imgSrc: ["'self'", 'data:', 'https:'],
         fontSrc: ["'self'", 'data:'],
         connectSrc: ["'self'"],
         formAction: ["'self'"],
