@@ -92,6 +92,19 @@ app.get('/', (req, res) => {
 
 app.use('/', bookingRouter(renderWithLayout));
 
+// Informational pages
+app.get('/services', (req, res) => {
+  renderWithLayout(req, res, 'services', { title: 'Our Services' });
+});
+
+app.get('/contact', (req, res) => {
+  renderWithLayout(req, res, 'contact', {
+    title: 'Contact Us',
+    contactEmail: process.env.ADMIN_EMAIL || 'info@example.com',
+    contactPhone: process.env.CONTACT_PHONE || '+1 (555) 123-4567',
+  });
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404);

@@ -1,0 +1,32 @@
+<section class="max-w-3xl mx-auto">
+  <div class="card">
+    <h1 class="text-2xl font-semibold mb-2">Contact Us</h1>
+    <p class="text-gray-600 mb-6">We’re here to help. Reach out any time.</p>
+
+    <div class="space-y-4">
+      <div>
+        <div class="text-sm text-gray-500">Phone</div>
+        <a href="tel:<%= (contactPhone || '').replace(/[^+\d]/g, '') %>" class="text-blue-600 hover:text-blue-700">
+          <%= contactPhone %>
+        </a>
+      </div>
+
+      <div>
+        <div class="text-sm text-gray-500">Email</div>
+        <a href="mailto:<%= contactEmail %>" class="text-blue-600 hover:text-blue-700">
+          <%= contactEmail %>
+        </a>
+      </div>
+
+      <div>
+        <div class="text-sm text-gray-500">Hours</div>
+        <p>24/7 for bookings. Office: Mon–Fri, 9am–5pm.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 text-sm text-gray-500">
+    <p>For immediate rides, use the Book button above for the fastest response.</p>
+  </div>
+</section>
+
