@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const session = require('express-session');
 require('dotenv').config();
 
 // Validate required env vars (warn-only for SMTP + admin)
@@ -48,8 +49,8 @@ app.use(
       useDefaults: true,
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.tailwindcss.com'],
+        styleSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", 'data:', 'https:'],
         fontSrc: ["'self'", 'data:'],
         connectSrc: ["'self'"],
@@ -69,6 +70,15 @@ app.use(cors(corsOrigin ? { origin: corsOrigin } : {}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Session for storing OAuth tokens
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'change-me',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 // Logging (avoid logging sensitive info; morgan logs method/url/status)
 app.use(morgan(isDev ? 'dev' : 'combined'));
 
@@ -85,12 +95,45 @@ function renderWithLayout(req, res, view, data = {}) {
 
 // Routes
 const bookingRouter = require('./routes/booking');
+const canvaService = require('./services/canva');
 
 app.get('/', (req, res) => {
-  renderWithLayout(req, res, 'index', { title: 'Book a Taxi', formData: {}, errors: {} });
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.use('/', bookingRouter(renderWithLayout));
+
+// Canva OAuth
+app.get('/auth/canva', (req, res) => {
+  res.redirect(canvaService.getAuthUrl());
+});
+
+app.get('/auth/canva/callback', async (req, res, next) => {
+  try {
+    const code = req.query.code;
+    if (!code) {
+      return res.status(400).send('Missing authorization code');
+    }
+    const token = await canvaService.exchangeCodeForToken(code);
+    req.session.canvaToken = token.access_token;
+    res.redirect('/');
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/canva/designs', async (req, res, next) => {
+  try {
+    const accessToken = req.session.canvaToken;
+    if (!accessToken) {
+      return res.status(401).json({ error: 'Not authenticated with Canva' });
+    }
+    const data = await canvaService.fetchDesigns(accessToken);
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // Informational pages
 app.get('/services', (req, res) => {

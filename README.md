@@ -65,7 +65,20 @@ Required:
 - `ADMIN_EMAIL`
 - `BOOKING_CC_CUSTOMER` (`true` or `false`)
 
+Optional for Canva integration:
+
+- `CANVA_CLIENT_ID`
+- `CANVA_CLIENT_SECRET`
+- `CANVA_REDIRECT_URI` (e.g., `http://localhost:3000/auth/canva/callback`)
+- `SESSION_SECRET`
+
 The server fails fast if any required SMTP or admin email variables are missing.
+
+## Canva Integration
+
+1. Create a Canva developer account and register an application to obtain your OAuth client ID and secret.
+2. Add `CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET`, `CANVA_REDIRECT_URI`, and `SESSION_SECRET` to your `.env`.
+3. Visit `/auth/canva` in your browser to begin the OAuth flow and fetch designs.
 
 ## Notes
 
