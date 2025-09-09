@@ -78,7 +78,7 @@ The server fails fast if any required SMTP or admin email variables are missing.
 
 1. Create a Canva developer account and register an application to obtain your OAuth client ID and secret.
 2. Add `CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET`, `CANVA_REDIRECT_URI`, and `SESSION_SECRET` to your `.env`.
-3. Use the "Import from Canva" button on the home page to begin the OAuth flow and fetch designs.
+3. Visit `/auth/canva` in your browser to begin the OAuth flow and fetch designs.
 
 ## Notes
 
